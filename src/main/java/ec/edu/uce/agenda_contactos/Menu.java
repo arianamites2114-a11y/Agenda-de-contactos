@@ -45,10 +45,12 @@ public class Menu {
 
                     case 3:
                         System.out.println("====== Buscar por nombre - Eliminar ======");
+                        p=f.eliminarContacto(nombres, telefonos, edades, p);
                         break;
 
                     case 4:
                         System.out.println("====== Buscar por nombre - Modificar teléfono =====");
+                        p=f.modificarTelefono(nombres, telefonos, edades, p);
                         break;
 
                     case 5:

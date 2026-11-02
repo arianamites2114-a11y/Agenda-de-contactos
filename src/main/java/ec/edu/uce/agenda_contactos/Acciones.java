@@ -238,12 +238,66 @@ public class Acciones {
     }
 
     public int eliminarContacto(String[] nombres, String[] telefonos, int[] edades, int p){
+        String buscar = "";
+        int posicion = -1;
+        if (p==0){
+            System.out.println("No existen elementos para eliminar");
+            return p;
+        }
 
+        buscar =  valorNombres("","Ingrese el nombre y apellido a buscar");
+
+        for (int i=0; i<p; i++){
+            if (nombres [i].equals(buscar)){
+                posicion = i;
+            }
+        }
+
+        if (posicion == -1 ){
+            System.out.println("El número no se encuentra en el arreglo");
+            return p;
+        }
+
+        for (int i=posicion; i<p-1;i++){
+            nombres [i] = nombres[i+1];
+            telefonos[i] = telefonos[i+1];
+            edades[i] = edades[i+1];
+        }
+
+        p--;
+        nomina(nombres, telefonos, edades, p);
         return p;
     }
 
-    public void modificarTelefono(String[] nombres, String[] telefonos, int[] edades, int p){
+    public int modificarTelefono(String[] nombres, String[] telefonos, int[] edades, int p){
+        String buscar = "", nuevoNum = "";
+        int posicion = -1;
 
+        buscar = valorNombres("", "Ingrese el nombre y apellido a buscar");
+
+        for (int i=0; i<p;i++){
+            if (nombres[i].equals(buscar)){
+                posicion = i;
+            }
+        }
+
+        if (posicion == -1){
+            System.out.println("Contacto no registrado");
+            return p;
+        }
+
+        do {
+            nuevoNum = valorTelefono("", "Ingrese el nuevo número de teléfono");
+
+            if (!validarTelefono(nuevoNum)) {
+                System.out.println("Ingrese un teléfono válido de 10 dígitos que comience con 09.");
+            }
+        } while (!validarTelefono(nuevoNum));
+
+        telefonos[posicion] = nuevoNum;
+        nomina(nombres,telefonos,edades, p);
+
+        return p;
     }
 
 }
